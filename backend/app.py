@@ -28,7 +28,8 @@ def quote(body: QuoteIn) -> dict:
         raise HTTPException(status_code=400, detail=str(err))
     if final < 0:  # a shop must never show a negative price, so this is a server fault
         raise HTTPException(status_code=500, detail="pricing returned a negative price")
-    return {"original_price": body.price, "discount_percent": body.discount_percent, "final_price": final}
+    return {"original_price": body.price, "discount_percent": body.discount_percent, "final_price": final,
+            "savings": round(body.price - final, 2)}
 
 
 # Mounted last so the API routes above win.

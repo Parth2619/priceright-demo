@@ -11,7 +11,7 @@ def test_health():
 
 def test_quote_applies_the_discount():
     data = client.post("/api/quote", json={"price": 200, "discount_percent": 10}).json()
-    assert data["final_price"] == 180.0
+    assert data["final_price"] == 180.0 and data["savings"] == 20.0
 
 
 def test_bad_discount_is_a_400():
